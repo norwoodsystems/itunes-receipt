@@ -77,6 +77,11 @@ module Itunes
       @expires_date = if receipt_attributes[:expires_date_formatted]
         Time.parse receipt_attributes[:expires_date_formatted].sub('Etc/GMT', 'GMT')
       end
+
+      if @expires_date.nil? && receipt_attributes[:expires_date]
+        @expires_date = Time.parse receipt_attributes[:expires_date].sub('Etc/GMT', 'GMT')
+      end
+
       @expires_date_ms = if receipt_attributes[:expires_date_ms]
         receipt_attributes[:expires_date_ms].to_i
       end
