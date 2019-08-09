@@ -73,8 +73,9 @@ module Itunes
         Time.parse receipt_attributes[:cancellation_date_pst].sub('America/Los_Angeles', 'PST')
       end
       @download_id = receipt_attributes[:download_id]
-      @expires_date = if receipt_attributes[:expires_date]
-        Time.parse receipt_attributes[:expires_date].sub('Etc/GMT', 'GMT')
+
+      @expires_date = if receipt_attributes[:expires_date_formatted]
+        Time.parse receipt_attributes[:expires_date_formatted].sub('Etc/GMT', 'GMT')
       end
       @expires_date_ms = if receipt_attributes[:expires_date_ms]
         receipt_attributes[:expires_date_ms].to_i
